@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8チャクラアロマボトル</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f8f3ec; --card:#fffdf9; --ink:#4a3f37; --sub:#8a7c70; --line:#eadfd2;
+  --accent:#c98a6b; --open:#5b9a78; --open-bg:#eaf4ee; --close:#b9735f; --close-bg:#f8ebe5;
+  --c:#c98a6b; --c-soft:#f6e9e1;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Yu Gothic",sans-serif;line-height:1.75;-webkit-text-size-adjust:100%}
+button{font:inherit;color:inherit;cursor:pointer}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px 64px}
+
+/* header */
+header.top{position:sticky;top:0;z-index:20;background:rgba(248,243,236,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:12px;padding-top:10px;padding-bottom:10px}
+.brand{font-weight:700;font-size:17px;white-space:nowrap;text-decoration:none;color:var(--ink)}
+.brand small{display:block;font-weight:400;font-size:11px;color:var(--sub);line-height:1.2}
+.search{flex:1;position:relative}
+.search input{width:100%;padding:10px 14px 10px 36px;border:1px solid var(--line);border-radius:999px;background:#fff;font:inherit;font-size:15px;color:var(--ink);outline:none}
+.search input:focus{border-color:var(--accent)}
+.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);opacity:.5}
+
+/* home */
+.intro{text-align:center;padding:26px 0 8px}
+.intro h1{font-size:22px;margin:0 0 4px}
+.intro p{margin:0;color:var(--sub);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:20px}
+@media (max-width:640px){.grid{gap:8px}.bottle{padding:10px 4px 10px;border-radius:14px}.bottle .no{font-size:10.5px;white-space:nowrap;letter-spacing:-.04em}.bottle .no .dot{display:none}.bottle img{max-width:62px}}
+.bottle{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px 10px 14px;text-align:center;transition:transform .15s, box-shadow .15s;position:relative}
+.bottle:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(120,90,60,.12)}
+.bottle img{width:100%;max-width:120px;aspect-ratio:199/588;object-fit:contain;display:block;margin:4px auto 10px;filter:drop-shadow(0 6px 8px rgba(60,40,30,.22))}
+.bottle .no{font-size:15px;font-weight:700}
+.bottle .sk{font-size:12px;color:var(--sub)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:middle;margin-right:4px}
+.badge{position:absolute;top:8px;right:8px;font-size:11px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:0 8px}
+.homebtns{display:flex;justify-content:center;gap:10px;margin-top:24px;flex-wrap:wrap}
+.pill{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 16px;font-size:14px}
+.pill.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:3px 12px;font-size:13px}
+.chip:hover{border-color:var(--accent)}
+
+/* detail */
+.back{margin:14px 0 0;background:none;border:none;color:var(--sub);padding:4px 0;font-size:14px}
+.hero{display:flex;gap:18px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin-top:8px;border-top:6px solid var(--c)}
+.hero img{width:70px;height:207px;object-fit:contain;flex:none;filter:drop-shadow(0 6px 8px rgba(60,40,30,.22))}
+.hero h2{margin:0;font-size:22px}
+.hero .meta{font-size:13px;color:var(--sub)}
+.hero .tag{margin:6px 0 0;padding:0;list-style:none;font-size:13px}
+.hero .tag li::before{content:"✦ ";color:var(--c)}
+@media (max-width:520px){.hero{flex-direction:column;text-align:center}.hero .tag{text-align:left}}
+.facts{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.fact{background:var(--c-soft);border-radius:10px;padding:2px 10px;font-size:12.5px}
+.fact b{font-weight:500;color:var(--sub);margin-right:4px}
+.cnav{display:flex;gap:6px;justify-content:space-between;margin-top:10px}
+.cnav button{background:none;border:none;color:var(--sub);font-size:13px;padding:4px}
+
+.tabs{display:flex;gap:4px;margin:18px 0 0;overflow-x:auto;scrollbar-width:none;position:sticky;top:61px;z-index:10;background:var(--bg);padding:6px 0}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;font-size:14px}
+.tabs button.on{background:var(--c);border-color:var(--c);color:#fff}
+
+.sec{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;margin-top:14px}
+.sec h3{margin:0 0 8px;font-size:17px;display:flex;align-items:center;gap:8px}
+.sec h3 .cnt{margin-left:auto;font-size:13px;font-weight:400;color:var(--sub)}
+.sec h4{margin:14px 0 6px;font-size:14px;color:var(--sub);font-weight:500;border-left:3px solid var(--c);padding-left:8px}
+.sec ul{list-style:none;margin:0;padding:0}
+.sec li{padding:6px 2px;border-bottom:1px dashed var(--line);white-space:pre-line;font-size:15px}
+.sec li:last-child{border-bottom:none}
+.note{display:inline-block;font-size:12px;color:#9a7b5f;background:#fbf3e4;border-radius:8px;padding:0 8px;margin:2px 4px 0 0;white-space:normal}
+.note::before{content:"✎ "}
+.names{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.names span{background:var(--c-soft);border-radius:999px;padding:1px 10px;font-size:13px}
+
+/* checklist */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:760px){.two{grid-template-columns:1fr}}
+.two .sec{margin-top:14px}
+.chk li{display:flex;gap:10px;align-items:flex-start;cursor:pointer;user-select:none}
+.chk li .box{flex:none;width:20px;height:20px;border:1.5px solid #cbbcad;border-radius:6px;margin-top:4px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff}
+.chk li .txt{flex:1;min-width:0}
+.sec.open h3{color:var(--open)} .sec.close h3{color:var(--close)}
+.sec.open li.on{background:var(--open-bg)} .sec.open li.on .box{background:var(--open);border-color:var(--open)}
+.sec.close li.on{background:var(--close-bg)} .sec.close li.on .box{background:var(--close);border-color:var(--close)}
+.sec.cause li.on{background:#f3eef8} .sec.cause li.on .box{background:#8d77a8;border-color:#8d77a8}
+.tally{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 16px;margin-top:14px}
+.tally .row{display:flex;align-items:center;gap:10px;font-size:14px;margin:4px 0}
+.tally .row span:first-child{width:7.5em;flex:none}
+.bar{flex:1;height:10px;background:#f0e8de;border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:99px}
+.tally .hint{font-size:12.5px;color:var(--sub);margin-top:6px}
+.tally .act{display:flex;gap:8px;justify-content:flex-end;margin-top:6px}
+.tally .act button{font-size:12.5px;padding:4px 12px}
+
+table.prof{width:100%;border-collapse:collapse;font-size:14.5px}
+table.prof th{width:8.5em;text-align:left;vertical-align:top;color:var(--sub);font-weight:500;padding:7px 8px 7px 0;border-bottom:1px dashed var(--line)}
+table.prof td{padding:7px 0;border-bottom:1px dashed var(--line)}
+@media (max-width:520px){table.prof th{width:6.5em}}
+
+/* search */
+.sh{margin:20px 0 4px;font-size:15px;color:var(--sub)}
+.rgroup{margin-top:14px}
+.rgroup .gh{display:flex;align-items:center;gap:8px;font-weight:700}
+.rgroup .gh img{width:18px;height:54px;object-fit:contain}
+.hit{display:block;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin-top:8px;font-size:14.5px;white-space:pre-line}
+.hit:hover{border-color:var(--accent)}
+.hit .where{display:block;font-size:12px;color:var(--sub);margin-bottom:2px}
+mark{background:#fde7a6;color:inherit;border-radius:3px;padding:0 1px}
+.flash{animation:flash 2.2s ease}
+@keyframes flash{0%,40%{background:#fde7a6}100%{background:transparent}}
+.empty{text-align:center;color:var(--sub);padding:40px 0}
+
+/* summary */
+.sumcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px 16px;margin-top:12px;border-left:6px solid var(--c)}
+.sumcard .gh{display:flex;align-items:center;gap:10px}
+.sumcard .gh img{width:20px;height:60px;object-fit:contain}
+.sumcard .gh b{font-size:16px}
+.sumcard .gh button{margin-left:auto;font-size:12.5px;padding:3px 12px}
+.sumcard ul{margin:6px 0 0;padding-left:1.2em;font-size:14px}
+.sumcard .lbl{font-size:12.5px;margin-top:6px;font-weight:700}
+footer{text-align:center;color:var(--sub);font-size:12px;padding:30px 0 10px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#4a3f37;color:#fff;padding:8px 18px;border-radius:999px;font-size:14px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:50}
+.toast.show{opacity:1}
+#lock{position:fixed;inset:0;z-index:100;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:16px}
+#lock.hide{display:none}
+.lockbox{text-align:center;max-width:320px;width:100%}
+.lockbox img{width:54px;height:160px;object-fit:contain;filter:drop-shadow(0 6px 8px rgba(60,40,30,.22))}
+.lockbox h1{font-size:20px;margin:12px 0 2px}
+.lockbox p{color:var(--sub);font-size:14px;margin:0 0 14px}
+.lockbox input{width:100%;padding:12px 16px;border:1px solid var(--line);border-radius:999px;font:inherit;font-size:16px;text-align:center;background:#fff;color:var(--ink);outline:none;margin-bottom:12px}
+.lockbox input:focus{border-color:var(--accent)}
+.lockbox .pill{width:100%;padding:11px}
+.lockbox .err{color:var(--close);margin-top:12px;min-height:1.5em}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="#/">8チャクラ<small>アロマボトル</small></a>
+  <label class="search">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="q" type="search" placeholder="ことばで探す（例：不安・腰痛・罪悪感）" autocomplete="off">
+  </label>
+</div></header>
+
+<div id="lock">
+  <div class="lockbox">
+    <img src="img/bottle8.webp" alt="">
+    <h1>8チャクラアロマボトル</h1>
+    <p>あいことばを入れてください</p>
+    <input type="text" id="passInput" placeholder="あいことば" autocomplete="off" autocapitalize="off" spellcheck="false">
+    <button class="pill primary" id="passBtn">ひらく</button>
+    <p class="err" id="passErr"></p>
+  </div>
+</div>
+<main class="wrap" id="app"></main>
+<div class="toast" id="toast"></div>
+
+<script src="data.enc.js"></script>
+<script>
+// ===== ボトルとチャクラの対応（なつこさんのアロマ） =====
+const META = [
+  {motif:'羽',     color:'#d8604f', soft:'#fbe7e2'},
+  {motif:'月',     color:'#e58a3c', soft:'#fcecdd'},
+  {motif:'レモン', color:'#d6ab1e', soft:'#fbf3d6'},
+  {motif:'ハート', color:'#5f9b62', soft:'#e6f2e4'},
+  {motif:'鳥',     color:'#3f9fcc', soft:'#e1f1f9'},
+  {motif:'くらげ', color:'#3e57a8', soft:'#e3e8f6'},
+  {motif:'蝶',     color:'#8a63b5', soft:'#efe8f7'},
+  {motif:'蓮',     color:'#c2508f', soft:'#f8e4ef'},
+];
+let D = null;
+const TAB_OF = {open:'state',close:'state',cause:'state',basic:'work',special:'work',frontback:'work',memory:'work',grow:'work',role:'work',aura:'aura',care:'care'};
+const TABS = [['state','状態をみる'],['profile','プロフィール'],['work','基本と働き'],['aura','オーラ'],['care','整える']];
+const SEC_ORDER = {work:['basic','special','frontback','grow','role','memory'],aura:['aura'],care:['care']};
+const FACT_KEYS = ['色','元素','惑星','星','感覚','ソルフェジオ周波数','発達年齢','内分泌腺'];
+const SUGGEST = ['不安','依存','罪悪感','自信','嫉妬','孤独','怒り','腰痛','頭痛','喉','直感','パートナー','お金','家族','使命','グラウンディング'];
+
+// ===== 保存（このブラウザの中だけ。外には送りません） =====
+const KEY = 'natsuko_chakra_reading_v1';
+let store = {checks:{}};
+try{ const s = JSON.parse(localStorage.getItem(KEY)); if(s && s.checks) store = s; }catch(e){}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(store)); }catch(e){} }
+
+// ===== 小道具 =====
+const $app = document.getElementById('app');
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const img = n => `img/bottle${n}.webp`;
+const kata2hira = s => s.replace(/[ァ-ヶ]/g, c => String.fromCharCode(c.charCodeAt(0) - 0x60));
+const norm = s => kata2hira(s.normalize('NFKC').toLowerCase());
+function lineId(c, sec, bi, li){ return `L-${c}-${sec}-${bi}-${li}`; }
+function profVal(c, k){ const p = D[c-1].profile.find(x => x.k === k); return p ? p.v : ''; }
+function shortVal(v, n){ v = v.replace(/^[・\s]+/, ''); return v.length > n ? v.slice(0, n) + '…' : v; }
+function setColor(n){
+  const m = META[n-1], r = document.documentElement.style;
+  r.setProperty('--c', m.color); r.setProperty('--c-soft', m.soft);
+}
+function toast(msg){ const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove('show'), 1800); }
+
+// チェック集計
+function countFor(n){
+  const r = {open:[0,0], close:[0,0], cause:[0,0]};
+  D[n-1].sections.forEach(s => {
+    if(!r[s.key]) return;
+    s.blocks.forEach((b, bi) => b.lines.forEach((l, li) => {
+      r[s.key][1]++;
+      if(store.checks[lineId(n, s.key, bi, li)]) r[s.key][0]++;
+    }));
+  });
+  return r;
+}
+function checkedLines(n, key){
+  const out = [];
+  const s = D[n-1].sections.find(x => x.key === key); if(!s) return out;
+  s.blocks.forEach((b, bi) => b.lines.forEach((l, li) => { if(store.checks[lineId(n, key, bi, li)]) out.push((b.h ? `（${b.h}）` : '') + l.t.split('\n')[0]); }));
+  return out;
+}
+
+// ===== 検索用の索引 =====
+const INDEX = [];
+function buildIndex(){
+D.forEach(c => {
+  c.profile.forEach((p, i) => INDEX.push({c:c.num, tab:'profile', id:`P-${c.num}-${i}`, where:p.k || 'ひとこと', text:p.v}));
+  c.sections.forEach(s => s.blocks.forEach((b, bi) => b.lines.forEach((l, li) => {
+    const notes = (l.n || []).join(' / ');
+    INDEX.push({c:c.num, tab:TAB_OF[s.key], id:lineId(c.num, s.key, bi, li), where:s.title + (b.h ? '・' + b.h : ''), text:l.t + (notes ? '\n✎ ' + notes : '')});
+  })));
+});
+INDEX.forEach(e => e.n = norm(e.text));
+}
+
+function highlight(text, words){
+  const nt = norm(text); // 1文字ずつ対応（NFKC済みデータなので長さは同じ）
+  if(nt.length !== text.length) return esc(text);
+  const marks = new Array(text.length).fill(false);
+  words.forEach(w => { let i = 0; while((i = nt.indexOf(w, i)) !== -1){ for(let k = i; k < i + w.length; k++) marks[k] = true; i += w.length; } });
+  let out = '', on = false;
+  for(let i = 0; i < text.length; i++){
+    if(marks[i] && !on){ out += '<mark>'; on = true; }
+    if(!marks[i] && on){ out += '</mark>'; on = false; }
+    out += esc(text[i]);
+  }
+  return out + (on ? '</mark>' : '');
+}
+
+// ===== 画面 =====
+function renderHome(){
+  document.documentElement.style.removeProperty('--c');
+  const cards = D.map(c => {
+    const n = c.num, m = META[n-1], k = countFor(n);
+    const done = k.open[0] + k.close[0] + k.cause[0];
+    return `<a class="bottle" href="#/c/${n}/state" style="text-decoration:none;color:inherit">
+      ${done ? `<span class="badge">✓ ${done}</span>` : ''}
+      <img src="${img(n)}" alt="第${n}チャクラのボトル">
+      <div class="no"><span class="dot" style="background:${m.color}"></span>第${n}チャクラ</div>
+    </a>`;
+  }).join('');
+  const chips = SUGGEST.filter(w => INDEX.some(e => e.n.includes(norm(w)))).map(w => `<button class="chip" data-q="${esc(w)}">${esc(w)}</button>`).join('');
+  $app.innerHTML = `
+    <div class="intro">
+      <h1>8チャクラアロマボトル</h1>
+    </div>
+    <div class="grid">${cards}</div>
+    <div class="homebtns">
+      <a class="pill primary" href="#/summary" style="text-decoration:none">チェックのまとめを見る</a>
+    </div>
+    <p class="sh" style="text-align:center;margin-top:28px">よく探すことば</p>
+    <div class="chips">${chips}</div>
+    <footer>なつこ 私用ノート ・ 元資料「8チャクラ 私用」より<br>チェックはこの端末の中だけに保存されます</footer>`;
+  $app.querySelectorAll('.chip').forEach(b => b.onclick = () => go('#/search/' + encodeURIComponent(b.dataset.q)));
+}
+
+function linesHTML(n, s, checkable){
+  return s.blocks.map((b, bi) => `
+    ${b.h ? `<h4>${esc(b.h)}</h4>` : ''}
+    <ul class="${checkable ? 'chk' : ''}">${b.lines.map((l, li) => {
+      const id = lineId(n, s.key, bi, li), on = store.checks[id];
+      const notes = (l.n || []);
+      const body = s.key === 'care' && notes.length
+        ? `${esc(l.t)}<div class="names">${notes.map(x => `<span>${esc(x)}</span>`).join('')}</div>`
+        : esc(l.t) + (notes.length ? '<br>' + notes.map(x => `<span class="note">${esc(x)}</span>`).join('') : '');
+      return checkable
+        ? `<li id="${id}" data-id="${id}" class="${on ? 'on' : ''}"><span class="box">${on ? '✓' : ''}</span><span class="txt">${body}</span></li>`
+        : `<li id="${id}">${body}</li>`;
+    }).join('')}</ul>`).join('');
+}
+
+function tallyHTML(n){
+  const k = countFor(n);
+  const pct = a => a[1] ? Math.round(a[0] / a[1] * 100) : 0;
+  let hint = 'あてはまるものを、そっとタップしてみてください。';
+  const o = k.open[0], c = k.close[0];
+  if(o + c > 0){
+    if(o > c * 1.5) hint = '開いているサインが多めです。このチャクラの力がよく巡っているようです。';
+    else if(c > o * 1.5) hint = '閉じているサインが多めです。ここはやさしくケアしてあげたいところ。「整える」タブもどうぞ。';
+    else hint = '開いているサインと閉じているサインが混ざっています。揺れている途中なのかもしれません。';
+  }
+  return `<div class="tally" id="tally">
+    <div class="row"><span>開いている</span><div class="bar"><i style="width:${pct(k.open)}%;background:var(--open)"></i></div><span>${k.open[0]} / ${k.open[1]}</span></div>
+    <div class="row"><span>閉じている</span><div class="bar"><i style="width:${pct(k.close)}%;background:var(--close)"></i></div><span>${k.close[0]} / ${k.close[1]}</span></div>
+    ${k.cause[1] ? `<div class="row"><span>崩れる原因</span><div class="bar"><i style="width:${pct(k.cause)}%;background:#8d77a8"></i></div><span>${k.cause[0]} / ${k.cause[1]}</span></div>` : ''}
+    <div class="hint">${hint}</div>
+    <div class="act"><button class="pill" id="clr">このチャクラのチェックを消す</button></div>
+  </div>`;
+}
+
+function renderDetail(n, tab, focus){
+  const c = D[n-1], m = META[n-1];
+  setColor(n);
+  const taglines = c.profile.filter(p => !p.k).map(p => `<li>${esc(p.v)}</li>`).join('');
+  const facts = FACT_KEYS.map(k => { const v = profVal(n, k); return v ? `<span class="fact"><b>${k === 'ソルフェジオ周波数' ? '周波数' : k}</b>${esc(shortVal(v, 16))}</span>` : ''; }).join('');
+  const tabs = TABS.map(([k, t]) => `<button data-tab="${k}" class="${k === tab ? 'on' : ''}">${t}</button>`).join('');
+  let body = '';
+  const sec = key => c.sections.find(s => s.key === key);
+  if(tab === 'state'){
+    const op = sec('open'), cl = sec('close'), ca = sec('cause');
+    body = tallyHTML(n) + `<div class="two">
+      ${op ? `<div class="sec open"><h3>🌱 開いている時</h3>${linesHTML(n, op, true)}</div>` : ''}
+      ${cl ? `<div class="sec close"><h3>🍂 閉じている時</h3>${linesHTML(n, cl, true)}</div>` : ''}
+    </div>
+    ${ca ? `<div class="sec cause"><h3>🌀 バランスを崩す原因</h3>${linesHTML(n, ca, true)}</div>` : ''}`;
+  } else if(tab === 'profile'){
+    body = `<div class="sec"><h3>プロフィール</h3><table class="prof">${c.profile.map((p, i) => p.k ? `<tr id="P-${n}-${i}"><th>${esc(p.k)}</th><td>${p.k === 'メモ' ? `<span class="note">${esc(p.v)}</span>` : esc(p.v)}</td></tr>` : `<tr id="P-${n}-${i}"><th>ひとこと</th><td>${esc(p.v)}</td></tr>`).join('')}</table></div>`;
+  } else {
+    body = SEC_ORDER[tab].map(sec).filter(Boolean).map(s => `<div class="sec"><h3>${esc(s.title)}</h3>${linesHTML(n, s, false)}</div>`).join('') || '<p class="empty">この項目は資料にありません</p>';
+  }
+  const prev = n > 1 ? n - 1 : 8, next = n < 8 ? n + 1 : 1;
+  $app.innerHTML = `
+    <button class="back" onclick="go('#/')">← ボトル一覧へ</button>
+    <div class="hero">
+      <img src="${img(n)}" alt="第${n}チャクラのボトル">
+      <div>
+        <h2><span class="dot" style="background:${m.color}"></span>第${n}チャクラ</h2>
+        <div class="meta">${esc(shortVal(profVal(n,'ネーム'), 40))}</div>
+        <div class="meta">${esc(profVal(n,'サンスクリット名'))}</div>
+        ${taglines ? `<ul class="tag">${taglines}</ul>` : ''}
+        <div class="facts">${facts}</div>
+      </div>
+    </div>
+    <div class="cnav"><button onclick="go('#/c/${prev}/${tab}')">← 第${prev}チャクラ</button><button onclick="go('#/c/${next}/${tab}')">第${next}チャクラ →</button></div>
+    <div class="tabs">${tabs}</div>
+    <div id="body">${body}</div>`;
+  $app.querySelectorAll('.tabs button').forEach(b => b.onclick = () => go(`#/c/${n}/${b.dataset.tab}`, true));
+  $app.querySelectorAll('.chk li').forEach(li => li.onclick = () => {
+    const id = li.dataset.id;
+    if(store.checks[id]) delete store.checks[id]; else store.checks[id] = 1;
+    save();
+    li.classList.toggle('on'); li.querySelector('.box').textContent = store.checks[id] ? '✓' : '';
+    document.getElementById('tally').outerHTML = tallyHTML(n); bindClear(n);
+  });
+  bindClear(n);
+  if(focus){
+    const el = document.getElementById(focus);
+    if(el){ setTimeout(() => { el.scrollIntoView({block:'center'}); el.classList.add('flash'); }, 50); }
+  } else window.scrollTo(0, 0);
+}
+function bindClear(n){
+  const b = document.getElementById('clr'); if(!b) return;
+  b.onclick = () => {
+    if(!confirm(`第${n}チャクラのチェックをすべて外しますか？`)) return;
+    Object.keys(store.checks).forEach(k => { if(k.startsWith(`L-${n}-`)) delete store.checks[k]; });
+    save(); route();
+  };
+}
+
+function renderSearch(q){
+  document.documentElement.style.removeProperty('--c');
+  const words = norm(q).split(/[\s、,]+/).filter(Boolean);
+  document.getElementById('q').value = q;
+  if(!words.length){ go('#/'); return; }
+  const hits = INDEX.filter(e => words.every(w => e.n.includes(w)));
+  if(!hits.length){ $app.innerHTML = `<p class="empty">「${esc(q)}」は見つかりませんでした。<br>ちがう言い方（ひらがな・カタカナ・短いことば）でも試してみてください。</p>`; return; }
+  let html = `<p class="sh">「${esc(q)}」 … ${hits.length}件</p>`;
+  for(let n = 1; n <= 8; n++){
+    const hs = hits.filter(h => h.c === n); if(!hs.length) continue;
+    html += `<div class="rgroup"><div class="gh"><img src="${img(n)}" alt=""><span>第${n}チャクラ</span><span style="font-weight:400;color:var(--sub);font-size:13px">${hs.length}件</span></div>
+      ${hs.map(h => `<button class="hit" data-go="#/c/${n}/${h.tab}/${h.id}"><span class="where">${esc(h.where)}</span>${highlight(h.text, words)}</button>`).join('')}</div>`;
+  }
+  $app.innerHTML = html;
+  $app.querySelectorAll('.hit').forEach(b => b.onclick = () => go(b.dataset.go));
+  window.scrollTo(0, 0);
+}
+
+function renderSummary(){
+  document.documentElement.style.removeProperty('--c');
+  let any = false, text = '【8チャクラ チェックまとめ】\n';
+  const cards = D.map(c => {
+    const n = c.num, k = countFor(n);
+    if(k.open[0] + k.close[0] + k.cause[0] === 0) return '';
+    any = true;
+    const o = checkedLines(n, 'open'), cl = checkedLines(n, 'close'), ca = checkedLines(n, 'cause');
+    text += `\n■第${n}チャクラ 開${k.open[0]} / 閉${k.close[0]}${k.cause[1] ? ' / 原因' + k.cause[0] : ''}\n`;
+    if(o.length) text += '[開いている]\n' + o.map(x => '・' + x).join('\n') + '\n';
+    if(cl.length) text += '[閉じている]\n' + cl.map(x => '・' + x).join('\n') + '\n';
+    if(ca.length) text += '[崩れる原因]\n' + ca.map(x => '・' + x).join('\n') + '\n';
+    const list = (t, a, col) => a.length ? `<div class="lbl" style="color:${col}">${t}</div><ul>${a.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '';
+    return `<div class="sumcard" style="--c:${META[n-1].color}">
+      <div class="gh"><img src="${img(n)}" alt=""><b>第${n}チャクラ</b><span style="font-size:13px;color:var(--sub)">開 ${k.open[0]} ・ 閉 ${k.close[0]}${k.cause[1] ? ' ・ 原因 ' + k.cause[0] : ''}</span><button class="pill" onclick="go('#/c/${n}/state')">ひらく</button></div>
+      ${list('🌱 開いている', o, 'var(--open)')}${list('🍂 閉じている', cl, 'var(--close)')}${list('🌀 崩れる原因', ca, '#8d77a8')}
+    </div>`;
+  }).join('');
+  $app.innerHTML = `
+    <button class="back" onclick="go('#/')">← ボトル一覧へ</button>
+    <div class="intro" style="padding-top:8px"><h1>チェックのまとめ</h1><p>チェックした項目を、チャクラごとに並べています</p></div>
+    ${any ? `<div class="homebtns"><button class="pill primary" id="copy">まとめをコピー</button><button class="pill" id="allclr">チェックをぜんぶ消す</button></div>${cards}`
+          : '<p class="empty">まだチェックはありません。<br>ボトルを選んで「状態をみる」でチェックしてみてください。</p>'}`;
+  const cp = document.getElementById('copy');
+  if(cp) cp.onclick = async () => {
+    try{ await navigator.clipboard.writeText(text); toast('コピーしました'); }
+    catch(e){ const t = document.createElement('textarea'); t.value = text; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); toast('コピーしました'); }
+  };
+  const ac = document.getElementById('allclr');
+  if(ac) ac.onclick = () => { if(confirm('8チャクラすべてのチェックを外しますか？')){ store.checks = {}; save(); route(); } };
+  window.scrollTo(0, 0);
+}
+
+// ===== 画面切りかえ =====
+function go(h, replace){ if(replace) history.replaceState(null, '', h); else location.hash = h; if(replace) route(); }
+function route(){
+  const h = decodeURIComponent(location.hash.slice(1) || '/');
+  const p = h.split('/').filter(Boolean);
+  if(p[0] === 'c' && +p[1] >= 1 && +p[1] <= 8) renderDetail(+p[1], TABS.some(t => t[0] === p[2]) ? p[2] : 'state', p[3]);
+  else if(p[0] === 'search') renderSearch(p.slice(1).join('/'));
+  else if(p[0] === 'summary') renderSummary();
+  else { document.getElementById('q').value = ''; renderHome(); }
+}
+window.addEventListener('hashchange', () => { if(D) route(); });
+let qt;
+document.getElementById('q').addEventListener('input', e => {
+  clearTimeout(qt);
+  const v = e.target.value.trim();
+  qt = setTimeout(() => { if(v) history.replaceState(null, '', '#/search/' + encodeURIComponent(v)), renderSearch(v); else go('#/'); }, 250);
+});
+// ===== あいことば（データは暗号化して置いてあります） =====
+const PASS_KEY = 'natsuko_chakra_bottle_pass';
+const b64buf = b => Uint8Array.from(atob(b), c => c.charCodeAt(0));
+async function tryUnlock(pass){
+  const enc = new TextEncoder(), L = window.CHAKRA_LOCK;
+  const km = await crypto.subtle.importKey('raw', enc.encode(pass), 'PBKDF2', false, ['deriveKey']);
+  const key = await crypto.subtle.deriveKey({name:'PBKDF2', salt:b64buf(L.salt), iterations:250000, hash:'SHA-256'}, km, {name:'AES-GCM', length:256}, false, ['decrypt']);
+  const plain = await crypto.subtle.decrypt({name:'AES-GCM', iv:b64buf(L.iv)}, key, b64buf(L.data));
+  return JSON.parse(new TextDecoder().decode(plain));
+}
+async function unlock(pass, silent){
+  const err = document.getElementById('passErr');
+  if(!silent) err.textContent = 'ひらいています…';
+  try{
+    D = await tryUnlock(pass);
+    try{ localStorage.setItem(PASS_KEY, pass); }catch(e){}
+    buildIndex();
+    document.getElementById('lock').classList.add('hide');
+    route();
+  }catch(e){
+    if(!silent) err.textContent = 'あいことばがちがうようです';
+    try{ if(silent) localStorage.removeItem(PASS_KEY); }catch(e2){}
+  }
+}
+document.getElementById('passBtn').onclick = () => { const v = document.getElementById('passInput').value.trim(); if(v) unlock(v, false); };
+document.getElementById('passInput').addEventListener('keydown', e => { if(e.key === 'Enter') document.getElementById('passBtn').click(); });
+let savedPass = null;
+try{ savedPass = localStorage.getItem(PASS_KEY); }catch(e){}
+if(savedPass) unlock(savedPass, true);
+</script>
+</body>
+</html>
