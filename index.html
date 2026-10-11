@@ -273,7 +273,7 @@ function renderHome(){
     </div>
     <p class="sh" style="text-align:center;margin-top:28px">よく探すことば</p>
     <div class="chips">${chips}</div>
-    <footer>なつこ 私用ノート ・ 元資料「8チャクラ 私用」より<br>チェックはこの端末の中だけに保存されます</footer>`;
+    <footer>提供元：CAKRAVEDA</footer>`;
   $app.querySelectorAll('.chip').forEach(b => b.onclick = () => go('#/search/' + encodeURIComponent(b.dataset.q)));
 }
 
